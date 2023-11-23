@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:navegar/src/pages/home_page.dart';
+import 'package:navegar/src/pages/sign_up.dart';
 import 'package:navegar/src/widgets/login_form.dart';
 
 import '../widgets/icon_containers.dart';
@@ -15,6 +17,51 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+              drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text("Jesucito"),
+                accountEmail: Text("jesucito@plegarias.com"),
+                currentAccountPicture: CircleAvatar(
+                    foregroundImage: AssetImage("images/baby.png")),
+                otherAccountsPictures: [
+                  CircleAvatar(foregroundImage: AssetImage("images/baby.png")),
+                  CircleAvatar(foregroundImage: AssetImage("images/baby.png"))
+                ],
+                decoration: BoxDecoration(color: Colors.blueGrey),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(14.0),
+                child: Text("Etiqueta 1"),
+              ),
+              ListTile(
+                  leading: const Icon(Icons.home),
+                  title: const Text("Primera opcion"),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  }),
+              ListTile(
+                leading: Icon(Icons.shopping_cart),
+                title: Text("Segunda opcion"),
+                onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUp()),
+                    );
+                  }
+              ),
+              ListTile(
+                leading: const Icon(Icons.favorite),
+                title: const Text("Tercera opcion"),
+              ),
+            ],
+          ),
+        ),
         body: Container(
           width: double.infinity,
           height: double.infinity,

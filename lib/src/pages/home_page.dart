@@ -13,12 +13,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return Scaffold(
         body: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               gradient: LinearGradient(colors: <Color>[
             Color.fromARGB(255, 8, 11, 158),
             Color.fromARGB(204, 41, 77, 197),
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
-    );
+      );
+      
   }
 }

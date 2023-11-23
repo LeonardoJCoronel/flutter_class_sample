@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navegar/src/pages/menu_drawer.dart';
 import 'package:navegar/src/widgets/input_text.dart';
 
 class LoginForm extends StatefulWidget {
@@ -54,7 +55,12 @@ class _LoginFormState extends State<LoginForm> {
               width: double.infinity,
               height: 60.0,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenuLateral())
+                  );
+                },
                 child: const Text(
                   "Log In",
                   style: TextStyle(

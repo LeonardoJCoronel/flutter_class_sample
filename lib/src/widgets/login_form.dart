@@ -25,13 +25,13 @@ class _LoginFormState extends State<LoginForm> {
               keyboard: TextInputType.emailAddress,
               icono: const Icon(Icons.verified_user),
               onChanged: (data) {
-                _email = data!;
+                _email = data;
               },
               validator: (data) {
                 if (data!.contains("@")) {
                   return "Email invalido";
                 }
-                return null!;
+                return null;
               },
             ),
             Divider(height: 20.0),
@@ -41,13 +41,13 @@ class _LoginFormState extends State<LoginForm> {
               keyboard: TextInputType.text,
               icono: const Icon(Icons.password),
               onChanged: (data) {
-                _password = data!;
+                _password = data;
               },
               validator: (data) {
                 if (data?.trim().length == 0) {
                   return "Contraseña invalida";
                 }
-                return null!;
+                return null;
               },
             ),
             Divider(height: 20.0),
@@ -56,15 +56,13 @@ class _LoginFormState extends State<LoginForm> {
               height: 60.0,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MenuLateral())
-                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MenuLateral()));
                 },
                 child: const Text(
                   "Log In",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 156, 47, 180),
                       fontFamily: "PoiretOne",
                       fontSize: 30.0),
                 ),

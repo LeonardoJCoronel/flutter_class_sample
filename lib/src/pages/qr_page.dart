@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class QrPage extends StatefulWidget {
   const QrPage({Key? key}) : super(key: key);
@@ -15,25 +14,28 @@ class _QrPageState extends State<QrPage> {
   late QRViewController _controller;
   final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   void _onQRViewCreated(QRViewController controller) {
-    setState(() {
-      _controller = controller;
-    });
+    _controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
-        _launchURL(result?.code);
+        // Puedes agregar lógica adicional según el contenido del código QR aquí.
       });
     });
   }
 
-  Future<void> _launchURL(String? url) async {
-    if (url != null && await canLaunch(url)) {
-      await launch(url);
-    } else {
-      // Handle error or show a message to the user
-      print('Could not launch $url');
-    }
+  void _startScan() {
+    _controller.resumeCamera();
+  }
+
+  void _stopScan() {
+    _controller.pauseCamera();
   }
 
   @override
@@ -52,10 +54,26 @@ class _QrPageState extends State<QrPage> {
             flex: 1,
             child: Center(
               child: (result != null)
-                  ? Text('Barcode Type: ${describeEnum(result!.format)}')
-                  : Text('Escanea un código'),
+                  ? Text('Barcode Type: ${describeEnum(result!.format)}\nContent: ${result!.code}')
+                  : Text('Presiona el botón para escanear un código QR'),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: _startScan,
+                  child: Text('Iniciar Escaneo'),
+                ),
+                ElevatedButton(
+                  onPressed: _stopScan,
+                  child: Text('Detener Escaneo'),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

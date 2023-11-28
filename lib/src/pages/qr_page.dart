@@ -10,7 +10,7 @@ class QrPage extends StatefulWidget {
 }
 
 class _QrPageState extends State<QrPage> {
-  late Barcode result;
+  Barcode? result;
   late QRViewController _controller;
   final GlobalKey _qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -42,7 +42,7 @@ class _QrPageState extends State<QrPage> {
             child: Center(
               child: (result != null)
                   ? Text(
-                      'Barcode Type: ${describeEnum(result.format)}   Data: ${result.code}')
+                      'Barcode Type: ${describeEnum(result!.format)}')
                   : Text('Escanea un código'),
             ),
           )

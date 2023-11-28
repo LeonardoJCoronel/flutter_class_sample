@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QrPage extends StatefulWidget {
-  const QrPage({super.key});
+  const QrPage({Key? key}) : super(key: key);
 
   @override
   State<QrPage> createState() => _QrPageState();
@@ -21,8 +22,18 @@ class _QrPageState extends State<QrPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        _launchURL(result?.code);
       });
     });
+  }
+
+  Future<void> _launchURL(String? url) async {
+    if (url != null && await canLaunch(url)) {
+      await launch(url);
+    } else {
+      // Handle error or show a message to the user
+      print('Could not launch $url');
+    }
   }
 
   @override
@@ -41,8 +52,7 @@ class _QrPageState extends State<QrPage> {
             flex: 1,
             child: Center(
               child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}')
+                  ? Text('Barcode Type: ${describeEnum(result!.format)}')
                   : Text('Escanea un código'),
             ),
           )

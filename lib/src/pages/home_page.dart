@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navegar/src/pages/qr_page.dart';
 import 'package:navegar/src/pages/sign_in.dart';
 import 'package:navegar/src/pages/sign_up.dart';
 import 'package:navegar/src/widgets/icon_containers.dart';
@@ -80,6 +81,27 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text(
                     "SIGN UP",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 156, 47, 180),
+                      fontFamily: "PoiretOne",
+                      fontSize: 30.0,
+                    ),
+                  )),
+            ),
+            const Divider(
+              height: 20.0,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 60.0,
+              child: ElevatedButton(
+                  onPressed: () {
+                    final route =
+                        MaterialPageRoute(builder: (context) => QrPage());
+                    Navigator.push(context, route);
+                  },
+                  child: const Text(
+                    "QR",
                     style: TextStyle(
                       color: Color.fromARGB(255, 156, 47, 180),
                       fontFamily: "PoiretOne",

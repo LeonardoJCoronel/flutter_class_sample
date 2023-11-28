@@ -18,6 +18,7 @@ class _RegisterFormState extends State<RegisterForm> {
   late bool _validatedName;
   late bool _validatedEmail;
   late bool _validatedPassword;
+  late bool _isStudent;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -32,6 +33,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _validatedName = false;
     _validatedEmail = false;
     _validatedPassword = false;
+    _isStudent = true; 
   }
 
   @override
@@ -123,6 +125,31 @@ class _RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
+            ListTile(
+              title: const Text('Student'),
+              leading: Radio(
+                value: true,
+                groupValue: _isStudent,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isStudent = value ?? false;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('Teacher'),
+              leading: Radio(
+                value: false,
+                groupValue: _isStudent,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _isStudent = value ?? false;
+                  });
+                },
+              ),
+            ),
+            Divider(height: 20.0),
             Divider(height: 20.0),
             SizedBox(
               width: double.infinity,
